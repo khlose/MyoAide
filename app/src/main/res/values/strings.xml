@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Myo Aide</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_status">StatusActivity</string>
+
+    --! Status Screen
+    <string name="lock_status">Locked</string>
+    <string name="unlock_status">Unlocked</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="action_bluetooth">Scan</string>
+</resources>
