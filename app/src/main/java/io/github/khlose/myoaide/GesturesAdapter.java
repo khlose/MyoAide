@@ -67,7 +67,7 @@ public class GesturesAdapter extends ArrayAdapter<GestureItem> {
         GestureItem dummyGesture = new GestureItem(gesture,task);
         this.add(dummyGesture);
         this.notifyDataSetChanged();
-       
+
     }
 
 
