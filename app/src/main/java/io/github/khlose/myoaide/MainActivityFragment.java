@@ -61,10 +61,8 @@ public class MainActivityFragment extends Fragment {
             public void onClick(View view) {
 
 
-                AddDummyItem("wave in","Pick up call");
+                gestureAdapter.AddDummyItem("wave in","Pick up call");
 
-
-                //call addGesture
             }
         });
 
@@ -73,12 +71,6 @@ public class MainActivityFragment extends Fragment {
         return rootView;
     }
 
-    public void AddDummyItem(String gesture, String task){
-        GestureItem dummyGesture = new GestureItem(gesture,task);
-        gestureAdapter.add(dummyGesture);
-        gestureAdapter.notifyDataSetChanged();
 
-        return;
-    }
 
 }

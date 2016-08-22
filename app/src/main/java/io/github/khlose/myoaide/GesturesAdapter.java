@@ -42,8 +42,6 @@ public class GesturesAdapter extends ArrayAdapter<GestureItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Log.d("DEBUGGG", "IN GET VIEW");
-
         GestureItem gestureItem = getItem(position);
 
         if(convertView == null){
@@ -63,6 +61,13 @@ public class GesturesAdapter extends ArrayAdapter<GestureItem> {
 
         return convertView;
 
+    }
+
+    public void AddDummyItem(String gesture, String task){
+        GestureItem dummyGesture = new GestureItem(gesture,task);
+        this.add(dummyGesture);
+        this.notifyDataSetChanged();
+       
     }
 
 
