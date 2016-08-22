@@ -1,9 +1,6 @@
 package io.github.khlose.myoaide;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-
-import java.security.PublicKey;
+import android.util.Log;
 
 /**
  * Created by Schwin on 8/12/2016.
@@ -11,42 +8,48 @@ import java.security.PublicKey;
 public class GestureItem {
     public String gesture;
     public String functionality;
-    public String iconFileName;
+    public int iconDrawable;
+
 
     public GestureItem(String gesture, String functionality){
         this.gesture = gesture;
         this.functionality = functionality;
-        this.iconFileName = getIconID(this.gesture);
+        this.iconDrawable = getIconID(this.gesture);
 
     }
 
-    private String getIconID(String gesture){
-        String imageFileName;
+    private int getIconID(String gesture){
+        int imgDrawable = R.drawable.gesture_blank;
+
 
         if(gesture.equalsIgnoreCase("rest")){
-            imageFileName = "geture_rest";
+            imgDrawable = R.drawable.gesture_blank;
+
+
         }
-        else if(gesture.equalsIgnoreCase("fist")){
-            imageFileName = "geture_fist";
+        if(gesture.equalsIgnoreCase("fist")){
+            imgDrawable = R.drawable.gesture_fist;
         }
         else if(gesture.equalsIgnoreCase("wave in")){
-            imageFileName = "geture_waveIn";
+            Log.d("Icon used:  ","WAVE IN");
+            imgDrawable = R.drawable.gesture_wavein;
         }
         else if(gesture.equalsIgnoreCase("wave out")){
-            imageFileName = "geture_waveOut";
+            imgDrawable = R.drawable.gesture_waveout;
         }
         else if(gesture.equalsIgnoreCase("fingers spread")){
-            imageFileName = "geture_fingersSpread";
+            imgDrawable = R.drawable.gesture_fingersspread;
         }
         else if(gesture.equalsIgnoreCase("double tap")){
-            imageFileName = "geture_doubleTap";
+            imgDrawable = R.drawable.gesture_doubletap;
         }
+
         else{
-            imageFileName = "geture_unknown";//unknwon
+            imgDrawable = R.drawable.gesture_blank;//unknwon
         }
 
-
-        return imageFileName;
+        return imgDrawable;
 
     }
+
 }
