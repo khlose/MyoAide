@@ -3,6 +3,8 @@ package io.github.khlose.myoaide;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,9 +66,35 @@ public class GesturesAdapter extends ArrayAdapter<GestureItem> {
     }
 
     public void AddDummyItem(String gesture, String task){
-        GestureItem dummyGesture = new GestureItem(gesture,task);
-        this.add(dummyGesture);
-        this.notifyDataSetChanged();
+        GestureDbHelper helper = new GestureDbHelper(getContext());
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String[] projection = {
+                GestureContract.GestureEntry.COLUMN_NAME_GESTURE,
+        };
+        String sortOrder = GestureContract.GestureEntry.COLUMN_NAME_ENTRY_ID + " DESC";
+        Cursor C = db.query(
+                GestureContract.GestureEntry.TABLE_NAME,
+                projection,
+                GestureContract.GestureEntry.COLUMN_NAME_GESTURE + "=" + gesture ,
+                null,
+                null,
+                null,
+                null
+        );
+
+
+
+        if(C == null){
+            GestureItem dummyGesture = new GestureItem(gesture,task);
+            this.add(dummyGesture);
+            this.notifyDataSetChanged();
+        }
+        else{
+            C.moveToFirst();
+            String gestureName = C.getString(C.getColumnIndexOrThrow(GestureContract.GestureEntry.COLUMN_NAME_GESTURE));
+            Log.d("Debugged Gesture:  ",gestureName);
+        }
+
 
     }
 

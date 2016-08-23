@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by spinkoh on 8/22/2016.
  */
-public class GestureHelper extends SQLiteOpenHelper {
+public class GestureDbHelper extends SQLiteOpenHelper {
 
     private static final String TEXT_TYPE = "TEXT";
     private static final String INT_TYPE = "INTEGER";
@@ -27,7 +27,7 @@ public class GestureHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "FeedGesture.db";
 
-    public GestureHelper(Context context) {
+    public GestureDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
