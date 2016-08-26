@@ -13,12 +13,12 @@ public class GestureDbHelper extends SQLiteOpenHelper {
     private static final String INT_TYPE = "INTEGER";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE" + GestureContract.GestureEntry.TABLE_NAME + " (" +
-                    GestureContract.GestureEntry._ID + "INTEGER PRIMARY KEY," +
-                    GestureContract.GestureEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
-                    GestureContract.GestureEntry.COLUMN_NAME_ICON + INT_TYPE + COMMA_SEP +
-                    GestureContract.GestureEntry.COLUMN_NAME_GESTURE + TEXT_TYPE + COMMA_SEP +
-                    GestureContract.GestureEntry.COLUMN_NAME_TASK + TEXT_TYPE + COMMA_SEP
+            "CREATE TABLE " + GestureContract.GestureEntry.TABLE_NAME + " (" +
+                    GestureContract.GestureEntry._ID + " INTEGER PRIMARY KEY," +
+                    GestureContract.GestureEntry.COLUMN_NAME_ENTRY_ID + " " + TEXT_TYPE + COMMA_SEP +
+                    GestureContract.GestureEntry.COLUMN_NAME_ICON + " " + INT_TYPE + COMMA_SEP +
+                    GestureContract.GestureEntry.COLUMN_NAME_GESTURE + " " + TEXT_TYPE + COMMA_SEP +
+                    GestureContract.GestureEntry.COLUMN_NAME_TASK + " " + TEXT_TYPE
                     + " )"
             ;
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS" + GestureContract.GestureEntry.TABLE_NAME;

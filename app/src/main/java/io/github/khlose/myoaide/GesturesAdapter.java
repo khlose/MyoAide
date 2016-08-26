@@ -1,10 +1,12 @@
 package io.github.khlose.myoaide;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.gesture.Gesture;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,15 +69,15 @@ public class GesturesAdapter extends ArrayAdapter<GestureItem> {
 
     public void AddDummyItem(String gesture, String task){
         GestureDbHelper helper = new GestureDbHelper(getContext());
-        SQLiteDatabase db = helper.getReadableDatabase();
+        SQLiteDatabase readableDatabase = helper.getReadableDatabase();
         String[] projection = {
                 GestureContract.GestureEntry.COLUMN_NAME_GESTURE,
         };
         String sortOrder = GestureContract.GestureEntry.COLUMN_NAME_ENTRY_ID + " DESC";
-        Cursor C = db.query(
+        Cursor C = readableDatabase.query(
                 GestureContract.GestureEntry.TABLE_NAME,
                 projection,
-                GestureContract.GestureEntry.COLUMN_NAME_GESTURE + "=" + gesture ,
+                GestureContract.GestureEntry.COLUMN_NAME_GESTURE + "=" + " '" + gesture+ "' " ,
                 null,
                 null,
                 null,
@@ -84,10 +86,20 @@ public class GesturesAdapter extends ArrayAdapter<GestureItem> {
 
 
 
-        if(C == null){
-            GestureItem dummyGesture = new GestureItem(gesture,task);
-            this.add(dummyGesture);
+        if(C.getCount() == 0 ){
+            GestureItem addedGesture = new GestureItem(gesture,task);
+
+            SQLiteDatabase writableDatabase = helper.getWritableDatabase();
+            ContentValues mappingValues = new ContentValues();
+            //mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_ENTRY_ID,);
+            mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_GESTURE,addedGesture.gesture);
+            mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_TASK,addedGesture.functionality);
+            mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_ICON,addedGesture.iconDrawable);
+            long newRowId = writableDatabase.insert(GestureContract.GestureEntry.TABLE_NAME,null,mappingValues);
+
+            this.add(addedGesture);
             this.notifyDataSetChanged();
+            Log.d("Debugged Gesture: ", C.toString());
         }
         else{
             C.moveToFirst();
