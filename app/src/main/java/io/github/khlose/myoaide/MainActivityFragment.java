@@ -1,6 +1,8 @@
 package io.github.khlose.myoaide;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -31,15 +33,37 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+
+
+
+        GestureDbHelper helper = new GestureDbHelper(getContext());
+        SQLiteDatabase readableDatabase = helper.getReadableDatabase();
+        Cursor gestureCursor = readableDatabase.rawQuery("SELECT * FROM " + GestureContract.GestureEntry.TABLE_NAME,null);
+        GestureItemAdapter gestureItemAdapter = new GestureItemAdapter(getContext(),gestureCursor);
+
+
+
+        /*
         gestureArrayList.add(new GestureItem("wave in","pickup phone"));
         gestureArrayList.add(new GestureItem("wave out","pickup phone"));
 
+
+
+
         gestureAdapter = new GesturesAdapter(getActivity(),R.layout.list_item_gesture,R.id.gestureName,gestureArrayList);
         gestureAdapter.notifyDataSetChanged();
+        */
+
+
+
+
 
         final ListView listView = (ListView)rootView.findViewById(R.id.listview_gesture);
 
-        listView.setAdapter(gestureAdapter);
+
+
+        listView.setAdapter(gestureItemAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -60,8 +84,10 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                //gestureAdapter.AddDummyItem("wave out","Pick up call");
 
-                gestureAdapter.AddDummyItem("wave in","Pick up call");
+
+
 
             }
         });
