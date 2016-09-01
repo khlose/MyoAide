@@ -1,7 +1,11 @@
 package io.github.khlose.myoaide;
 
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +17,11 @@ import android.widget.TextView;
  * Created by spinkoh on 8/26/2016.
  */
 public class GestureItemAdapter extends CursorAdapter{
+    Context context;
     public GestureItemAdapter(Context context, Cursor c) {
+
         super(context, c,0);
+        this.context = context;
     }
 
     @Override
@@ -36,6 +43,25 @@ public class GestureItemAdapter extends CursorAdapter{
         gestureTextView.setText(gesture);
         taskTextView.setText(task);
         logoImageView.setImageResource(icon);
+    }
+
+    public void addGesture(String gestureString, String taskString){
+        GestureItem addedGesture = new GestureItem(gestureString,taskString);
+        GestureDbHelper helper = new GestureDbHelper(this.context);
+        SQLiteDatabase writableDatabase = helper.getWritableDatabase();
+        ContentValues mappingValues = new ContentValues();
+        //mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_ENTRY_ID,);
+        mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_GESTURE,addedGesture.gesture);
+        mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_TASK,addedGesture.functionality);
+        mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_ICON,addedGesture.iconDrawable);
+        long newRowId = writableDatabase.insert(GestureContract.GestureEntry.TABLE_NAME,null,mappingValues);
+
+                /*
+                this.add(addedGesture);
+                this.notifyDataSetChanged();
+                */
+
+
     }
 
 
