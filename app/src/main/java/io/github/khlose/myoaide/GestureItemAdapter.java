@@ -18,10 +18,12 @@ import android.widget.TextView;
  */
 public class GestureItemAdapter extends CursorAdapter{
     Context context;
+    Cursor cursor;
     public GestureItemAdapter(Context context, Cursor c) {
 
         super(context, c,0);
         this.context = context;
+        this.cursor = c;
     }
 
     @Override
@@ -55,13 +57,10 @@ public class GestureItemAdapter extends CursorAdapter{
         mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_TASK,addedGesture.functionality);
         mappingValues.put(GestureContract.GestureEntry.COLUMN_NAME_ICON,addedGesture.iconDrawable);
         long newRowId = writableDatabase.insert(GestureContract.GestureEntry.TABLE_NAME,null,mappingValues);
-
                 /*
                 this.add(addedGesture);
                 this.notifyDataSetChanged();
                 */
-
-
     }
 
 

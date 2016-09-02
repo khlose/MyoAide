@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 /**
@@ -63,6 +64,21 @@ public class MainActivityFragment extends Fragment {
                 startActivity(detailIntent);
                */
 
+                Cursor cursor = ((GestureItemAdapter)listView.getAdapter()).getCursor();
+                cursor.moveToPosition(position);
+                String gestureSelected = cursor.getString(cursor.getColumnIndex(GestureContract.GestureEntry.COLUMN_NAME_GESTURE));
+                String taskSelected = cursor.getString(cursor.getColumnIndex(GestureContract.GestureEntry.COLUMN_NAME_TASK));
+                int iconSelected = cursor.getInt(cursor.getColumnIndex(GestureContract.GestureEntry.COLUMN_NAME_TASK));
+
+                Intent addGestureIntent = new Intent(getActivity(),AddActivity.class);
+                addGestureIntent.putExtra("isAdding",false);
+                addGestureIntent.putExtra("gesture",gestureSelected);
+                addGestureIntent.putExtra("task",taskSelected);
+                addGestureIntent.putExtra("iconId",iconSelected);
+
+                startActivity(addGestureIntent);
+
+
             }
         });
 
@@ -72,12 +88,20 @@ public class MainActivityFragment extends Fragment {
             public void onClick(View view) {
 
 
+                Intent addGestureIntent = new Intent(getActivity(),AddActivity.class);
+                addGestureIntent.putExtra("isAdding",true);
+
+                startActivity(addGestureIntent);
+
+            /*
+
             gestureItemAdapter.addGesture("wave in","sup");
             GestureDbHelper helper = new GestureDbHelper(getContext());
             SQLiteDatabase readableDatabase = helper.getReadableDatabase();
             Cursor updatedCursor = readableDatabase.rawQuery("SELECT * FROM " + GestureContract.GestureEntry.TABLE_NAME,null);
 
             gestureItemAdapter.changeCursor(updatedCursor);
+            */
 
 
             }
