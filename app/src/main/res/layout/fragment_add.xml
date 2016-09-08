@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +8,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="io.github.khlose.myoaide.AddActivityFragment"
     tools:showIn="@layout/activity_add">
+    <ImageView android:id="@+id/addingGestureIcon"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gestureSpinner"
+        android:layout_weight="1" />
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/taskSpinner"
+        android:layout_weight="1" />
+    <Button/>
 
 
-
-</RelativeLayout>
+</LinearLayout>
