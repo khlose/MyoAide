@@ -8,4 +8,5 @@
     <string name="unlock_status">Unlocked</string>
     <string name="title_activity_add">AddActivity</string>
     <string name="action_bluetooth">Scan</string>
+    <string name="submitGesture">submit</string>
 </resources>
