@@ -52,10 +52,17 @@ public class StatusActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_bluetooth){
-            startActivity(pairBluetoothDevice());
+        switch (item.getItemId()){
+            case R.id.action_bluetooth:
+                startActivity(pairBluetoothDevice());
+                return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return false;
         }
-        return true;
+
     }
 
     private Intent pairBluetoothDevice(){
